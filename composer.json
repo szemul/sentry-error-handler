@@ -1,0 +1,39 @@
+{
+    "name": "szemul/sentry-error-handler",
+    "description": "Error handler implementation for sentry that uses the error handling context",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^8.0",
+        "sentry/sentry": "^3.3.2",
+        "szemul/error-handler": "^1.0.0",
+        "szemul/logging-error-handling-context": "^1.0.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.0.0",
+        "jetbrains/phpstorm-attributes": "^1.0",
+        "mockery/mockery": "^1.0",
+        "phpstan/phpstan": "^0.12.80",
+        "phpunit/phpunit": "^9.5.5",
+        "sentry/sdk": "^3.2.0"
+    },
+    "suggest": {
+        "monolog/monolog": "For using the monolog formatter",
+        "szemul/error-handler": "For using the sentry error handler",
+        "sentry/sentry": "For using the sentry error handler"
+    },
+    "autoload": {
+        "psr-4": {
+            "Szemul\\SentryErrorHandler\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Szemul\\SentryErrorHandler\\Test\\": "tests"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true
+    }
+}
