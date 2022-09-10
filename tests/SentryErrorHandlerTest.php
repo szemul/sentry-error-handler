@@ -242,23 +242,6 @@ class SentryErrorHandlerTest extends TestCase
             }));
     }
 
-    /**
-     * @param array<string,mixed> $errorContext
-     */
-    private function expectErrorContextSent(MockInterface | LegacyMockInterface $scope, array $errorContext): void
-    {
-        // @phpstan-ignore-next-line
-        $this->sentryArrayHelper->shouldReceive('cleanUpArray')
-            ->once()
-            ->with($errorContext)
-            ->andReturn($errorContext);
-
-        // @phpstan-ignore-next-line
-        $scope->shouldReceive('setContext')
-            ->once()
-            ->with('context', $errorContext);
-    }
-
     private function expectStandardValuesSetWithErrorLink(MockInterface | LegacyMockInterface $scope): void
     {
         // @phpstan-ignore-next-line
