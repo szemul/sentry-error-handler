@@ -17,11 +17,6 @@
         "phpunit/phpunit": "^9.5.5",
         "sentry/sdk": "^3.2.0"
     },
-    "suggest": {
-        "monolog/monolog": "For using the monolog formatter",
-        "szemul/error-handler": "For using the sentry error handler",
-        "sentry/sentry": "For using the sentry error handler"
-    },
     "autoload": {
         "psr-4": {
             "Szemul\\SentryErrorHandler\\": "src"
