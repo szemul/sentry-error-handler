@@ -11,6 +11,7 @@ use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 use Sentry\State\HubInterface;
 use Szemul\LoggingErrorHandlingContext\ContextInterface;
+use Szemul\SentryErrorHandler\Factory\ClientHubFactory;
 use Szemul\SentryErrorHandler\Helper\SentryArrayHelper;
 use Szemul\SentryErrorHandler\SentryErrorHandler;
 use Throwable;
@@ -25,6 +26,7 @@ class SentryErrorHandlerTest extends TestCase
     private HubInterface | MockInterface | LegacyMockInterface      $hubInterface;
     private ContextInterface | MockInterface | LegacyMockInterface  $context;
     private SentryArrayHelper | MockInterface | LegacyMockInterface $sentryArrayHelper;
+    private ClientHubFactory | MockInterface | LegacyMockInterface $clientHubFactory;
 
     protected function setUp(): void
     {
@@ -33,6 +35,7 @@ class SentryErrorHandlerTest extends TestCase
         $this->hubInterface      = Mockery::mock(HubInterface::class);
         $this->context           = Mockery::mock(ContextInterface::class);
         $this->sentryArrayHelper = Mockery::mock(SentryArrayHelper::class);
+        $this->clientHubFactory  = Mockery::mock(ClientHubFactory::class);
     }
 
     public function testHandleError(): void
@@ -108,6 +111,11 @@ class SentryErrorHandlerTest extends TestCase
 
                 return true;
             });
+
+        // @phpstan-ignore-next-line
+        $this->clientHubFactory->shouldReceive('getSentryClientHub')
+            ->once()
+            ->andReturn($this->hubInterface);
 
         return $scope;
     }
@@ -255,6 +263,6 @@ class SentryErrorHandlerTest extends TestCase
 
     private function getHandler(?string $baseUrl = null): SentryErrorHandler
     {
-        return new SentryErrorHandler($this->hubInterface, $this->context, $this->sentryArrayHelper, $baseUrl);
+        return new SentryErrorHandler($this->context, $this->sentryArrayHelper, $this->clientHubFactory, $baseUrl);
     }
 }
