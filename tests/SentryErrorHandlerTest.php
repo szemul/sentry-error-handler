@@ -263,6 +263,6 @@ class SentryErrorHandlerTest extends TestCase
 
     private function getHandler(?string $baseUrl = null): SentryErrorHandler
     {
-        return new SentryErrorHandler($this->hubInterface, $this->context, $this->sentryArrayHelper, $this->clientHubFactory, $baseUrl);
+        return new SentryErrorHandler($this->context, $this->sentryArrayHelper, $this->clientHubFactory, $baseUrl);
     }
 }
